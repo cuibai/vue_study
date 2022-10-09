@@ -2,7 +2,7 @@
  * @Author: cuibai 2367736060@qq.com
  * @Date: 2022-10-08 10:34:20
  * @LastEditors: cuibai 2367736060@qq.com
- * @LastEditTime: 2022-10-08 14:36:18
+ * @LastEditTime: 2022-10-09 17:56:35
  * @FilePath: \webpack-s\src\index.html
  * @Description: 
  * 
@@ -16,12 +16,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>隔行变色</title>
+    <!-- <script type="moudle" src="./index.js"></script> -->
+    <link rel="shortcut icon" href="#" />
+    <!-- 这里引用的是 内存中的 bundle 文件  而不是 本地的文件 ,
+    虽然内存的文件 看不到  但是系统是可以自己引用到的 -->
+    <script src="/bundle.js"></script>
 </head>
 
 <body>
     <ul>
         <li>11</li>
-        <li>21</li>
+        <li id="li-w">21</li>
         <li>31</li>
         <li>41</li>
         <li>51</li>
@@ -32,11 +37,16 @@
         <li>10</li>
     </ul>
 
-
-
-
-    <!-- <script src="../node_modules/jquery/dist/jquery.js"></script> -->
-
 </body>
 
 </html>
+<!-- 
+    1. webpack 只能处理 以 js 结尾的文件
+    2. 代码中含有 index.js 这个文件 回去查找 webpack.config.js 这个文件的文件配置
+    3. webpack 处理不了的文件,会查找  webpack.config.js 的文件配置,查找 moudle 中是否配置了对应的 loader 加载器 
+    4.webpack 会把 css 文件交给第一个 loader处理
+    5. css-loader 处理完 交付给下一个loader去处理
+    6.style-loader 处理完毕后,没有下一个 loader ,会把结果交给 webpack
+    7. webpack 把style-loader 的处理结果合并到 /dist/bundle.js 文件中
+    8. 所有的文件处理完毕,生成最终的打包好的文件 
+-->
